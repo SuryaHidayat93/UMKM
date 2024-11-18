@@ -5,11 +5,11 @@ export default function Navbar() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div className="h-1/6 w-full flex justify-center px-4 md:px-1">
+        <div className="w-full flex justify-center  top-0 left-0 md:px-20 px-5 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <header className="flex items-center justify-between h-12 w-full mt-6 md:mt-10">
 
                 {/* Logo */}
-                <div className="text-2xl sm:text-lg text-unik font-outfit font-black">
+                <div className="text-2xl sm:text-lg text-unik font-outfit font-black md:text-3xl">
                     Warung UMKM Riau
                 </div>
 
