@@ -14,13 +14,13 @@ export default function Landingpage() {
             <div className="flex flex-col h-auto w-full gap-1 md:w-11/12 space-y-6 md:space-y-10 bg-slate-500 overflow-y-auto">
                 <Navbar />
 
-                {/* <div className="h-screen">  
+                <div className="h-screen">
                     <Home className="h-full" />
                 </div>
-                
+
                 {showKatalogProduk && <KatalogProduk />}
-            
-                {showLayananKami1 && <LayananKami1 />} */}
+
+                {showLayananKami1 && <LayananKami1 />}
                 <Tentangkami />
             </div>
         </div>
