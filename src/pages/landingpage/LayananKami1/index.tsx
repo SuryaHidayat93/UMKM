@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function LayananKami1() {
     return (
-        <div className="px-4 h-screen md:px-1">
+        <div className="px-4 md:h-screen md:px-1">
             <div className="items-center justify-center md:items-start flex flex-col w-full">
                 <h1 className="text-2xl font-semibold text-black">
                     Apa saja layanan kami?

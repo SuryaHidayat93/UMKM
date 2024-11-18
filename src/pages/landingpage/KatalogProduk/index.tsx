@@ -1,9 +1,9 @@
 import Image from 'next/image';
 export default function KatalogProduk() {
     return (
-        <div className=" bg-slate-500 h-screen md:px-1 px-4">
+        <div className=" flex flex-col gap-10 md:px-1 px-4">
             {/* Bagian Header */}
-            <div className="flex flex-col items-start h-1/6 w-full bg-slate-300">
+            <div className="flex flex-col items-start h-1/6 w-full ">
                 <h1 className="text-2xl font-semibold text-black">Katalog Produk</h1>
                 <div className="flex flex-col md:flex-row items-start md:items-center w-full gap-4 ">
                     <p className="text-black">
@@ -19,8 +19,8 @@ export default function KatalogProduk() {
             </div>
 
             {/* Bagian Card dalam div hitam */}
-            <div className="flex flex-col bg-black h-4/6 w-full">
-                <div className="grid grid-cols-2 bg-slate-200 h-full lg:grid-cols-4 gap-4 md:gap-10 md:py-9 ">
+            <div className="flex flex-col  h-4/6 w-full">
+                <div className="grid grid-cols-2  h-full lg:grid-cols-4 gap-4 md:gap-10 md:py-9 ">
                     {/* Card 1 */}
                     <div className="border rounded-lg p-4 h-full bg-white shadow-md">
                         <h2 className="font-bold text-lg">Nama Produk</h2>

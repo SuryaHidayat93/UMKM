@@ -1,6 +1,6 @@
 export default function Tentangkami() {
     return (
-        <div className="h-screen w-full bg-slate-300 flex flex-col gap-10 p-6">
+        <div className="md:h-screen w-full  flex flex-col gap-10 p-6">
             <h1 className="text-2xl font-semibold text-black text-center">Tentang Kami</h1>
             <div className="w-full flex justify-center">
                 {/* Kontainer Grid */}

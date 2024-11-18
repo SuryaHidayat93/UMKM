@@ -5,7 +5,7 @@ export default function Navbar() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div className="fixed w-full flex justify-center  top-0 left-0 md:px-20 px-5 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="w-full flex justify-center  top-0 left-0 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <header className="flex items-center justify-between h-12 w-full mt-6 md:mt-10">
 
                 {/* Logo */}
@@ -40,7 +40,7 @@ export default function Navbar() {
 
             {/* Menu Mobile */}
             {isMobileMenuOpen && (
-                <div className="md:hidden fixed top-0 left-0 w-full h-full bg-slate-700 bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 px-4">
+                <div className="md:hidden fixed top-0 left-0 w-full h-full bg-opacity-90 z-50 flex flex-col items-center justify-center space-y-6 px-4">
                     <Link href="#" className="text-white text-lg hover:text-unik">Beranda</Link>
                     <Link href="#" className="text-white text-lg hover:text-unik">Produk</Link>
                     <Link href="#" className="text-white text-lg hover:text-unik">Layanan</Link>
