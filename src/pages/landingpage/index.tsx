@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar/index";
 import Home from "@/pages/landingpage/Home";
-import KatalogProduk from "./KatalogProduk";
+import KatalogProduk from "@/pages/landingpage/KatalogProduk";
 import LayananKami1 from "./LayananKami1";
 import Tentangkami from "./Tentangkami";
 
