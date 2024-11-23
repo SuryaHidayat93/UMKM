@@ -22,15 +22,15 @@ const CardProduk: React.FC<CardProdukProps> = ({
     onDelete,
 }) => {
     return (
-        <div className="bg-white rounded-xl p-4 shadow-md w-5/6 gap-3 flex flex-col">
+        <div className="bg-white rounded-xl p-4 shadow-md gap-3 flex flex-col">
             {/* Header Card */}
-            <div className="h-1/6 w-full bg-slate-300">
+            <div className="h-1/6 w-full ">
                 <h1 className="font-bold text-xl text-black">{namaProduk}</h1>
-                <p>{ukuran}</p>
+                <p className="text-abu">{ukuran}</p>
             </div>
 
             {/* Gambar Produk */}
-            <div className="h-5/6 w-full flex items-center justify-center bg-slate-500">
+            <div className="h-5/6 w-full flex items-center justify-center ">
                 <Image
                     className="bg-none"
                     src={gambar}

@@ -1,12 +1,12 @@
 import React from "react";
 
-interface ModaleditprodukProps {
+interface ModaltambahprodukProps {
     isOpen: boolean;
     onClose: () => void;
     onSubmit?: () => void; // opsional
 }
 
-const Modaleditproduk: React.FC<ModaleditprodukProps> = ({
+const Modaltambahproduk: React.FC<ModaltambahprodukProps> = ({
     isOpen,
     onClose,
     onSubmit,
@@ -24,7 +24,7 @@ const Modaleditproduk: React.FC<ModaleditprodukProps> = ({
                     ×
                 </button>
                 <h2 className="text-xl font-semibold text-center text-green-700 mb-4">
-                    Edit Produk
+                    Tambah Produk
                 </h2>
                 <form
                     className="space-y-4"
@@ -131,4 +131,4 @@ const Modaleditproduk: React.FC<ModaleditprodukProps> = ({
     );
 };
 
-export default Modaleditproduk;
+export default Modaltambahproduk;
