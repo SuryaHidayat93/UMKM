@@ -3,10 +3,12 @@ import Navbar from "@/components/navbar/navbarKD";
 import CardProduk from "@/components/Card/Kadiv/Produk";
 import Modaleditproduk from "@/components/Modal/EditProduk";
 import Modaltambahproduk from "@/components/Modal/TambahProduk";
+import ModalHapusproduk from "@/components/Modal/DelateProduk";
 
 export default function Pengelolaanproduk() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalTambahProdukOpen, setIsModalTambahProdukOpen] = useState(false);
+    const [isModalHapusProdukOpen, setIsModalHapusProdukOpen] = useState(false)
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -14,6 +16,8 @@ export default function Pengelolaanproduk() {
     const openTambahProduk = () => setIsModalTambahProdukOpen(true);
     const closeTambahProduk = () => setIsModalTambahProdukOpen(false);
 
+    const openDelateProduk = () => setIsModalHapusProdukOpen(true);
+    const closeDelateProduk = () => setIsModalHapusProdukOpen(false);
     const handleSubmit = () => {
         console.log("Produk berhasil disimpan!");
         closeModal();
@@ -57,6 +61,12 @@ export default function Pengelolaanproduk() {
                     onSubmit={handleSubmit}
                 />
 
+                <ModalHapusproduk
+                    isOpen={isModalHapusProdukOpen}
+                    onClose={closeDelateProduk}
+
+                />
+
                 {/* Produk List */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10 h-full w-full place-items-center py-5 md:px-11">
                     <CardProduk
@@ -66,7 +76,7 @@ export default function Pengelolaanproduk() {
                         harga="Rp. 100.000"
                         gambar="/images/booth2.png"
                         onEdit={openModal}
-                        onDelete={handleDelete}
+                        onDelete={openDelateProduk}
                     />
                     <CardProduk
                         namaProduk="Nama Produk"
