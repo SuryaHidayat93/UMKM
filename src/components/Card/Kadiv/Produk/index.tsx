@@ -55,7 +55,7 @@ const CardProduk: React.FC<CardProdukProps> = ({
                     Edit
                 </button>
                 <button
-                    className="bg-merah px-10 py-2 rounded-md"
+                    className="bg-merah px-10 py-2 rounded-lg"
                     onClick={onDelete}
                 >
                     Hapus
