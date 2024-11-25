@@ -12,8 +12,8 @@ export default function CardPermintaanSewa(props: CardPermintaanSewaProps) {
         <div className="bg-white w-5/6 rounded-2xl gap-6 shadow-md p-6 flex flex-col">
             <h1 className="text-unik text-2xl font-bold">{props.Nama}</h1>
             <div>
-                <p className="text-abu">Alamat:</p>
-                <p className="text-abu">Tanggal Permintaan:</p>
+                <p className="text-black">Alamat: {props.Alamat}</p>
+                <p className="text-black">Tanggal Permintaan:</p>
             </div>
             <div className="w-full flex items-center justify-center">
                 <button
