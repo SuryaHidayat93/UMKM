@@ -21,6 +21,20 @@ export default {
         abu2: "#D9D9D9",
         merah: "#B83030",
       },
+      keyframes: {
+        popup: {
+          '0%': { transform: 'scale(0.5)', opacity: "0" },
+          '100%': { transform: 'scale(1)', opacity: "1" }
+        },
+        slideIn: {
+          '0%': { transform: 'translateY(100%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        "popup": 'popup 0.3s ease-out',
+        "slideIn": 'slideIn 0.3s ease-out',
+      }
     },
   },
   plugins: [],

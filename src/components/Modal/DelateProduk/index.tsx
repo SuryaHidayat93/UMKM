@@ -13,7 +13,7 @@ const ModalHapusproduk: React.FC<ModalHapusprodukProps> = ({
 
     return (
         <div className="fixed flex inset-0 items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="relative flex flex-col w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+            <div className="relative flex flex-col w-full max-w-md p-6 bg-white animate-popup rounded-lg shadow-lg">
                 <button className="absolute right-3 top-3 text-black"
                     onClick={onClose}>X</button>
                 <h2 className="text-xl font-semibold text-center text-black">
