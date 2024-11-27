@@ -1,3 +1,4 @@
+import ModalHapuspenyewa from "@/components/Modal/DelatePenyewa";
 import { useState, useEffect } from "react";
 interface BoothCardProps {
     boothName: string;
@@ -9,6 +10,10 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
     const [penyewa, setPenyewa] = useState<string | null>(initialPenyewa);
     const [status, setStatus] = useState(initialStatus);
 
+    const [isModalHapusPenyewa, setIsModalHapusPenyewa] = useState(false);
+
+    const openModalHapusPenyewa = () => setIsModalHapusPenyewa(true);
+    const closeModalHapusPenyewa = () => setIsModalHapusPenyewa(false);
     useEffect(() => {
         setStatus(initialStatus);
     }, [initialStatus]);
@@ -55,7 +60,8 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
     };
 
     return (
-        <div className={`rounded-lg shadow-md w-full border pb-3 bg-white text-white ${cardColor}`}>
+        <div className={`rounded-lg shadow-md w-full border pb-3 bg-white text-white ${cardColor}`} >
+            <ModalHapuspenyewa isOpen={isModalHapusPenyewa} onClose={closeModalHapusPenyewa} />
             <div className={`${divColor} rounded-t-lg w-full justify-between flex px-4 py-2`}>
                 <h3 className="text-lg font-bold">{boothName}</h3>
                 <div className="rounded-lg px-2 items-center flex justify-center border border-white">
@@ -115,9 +121,34 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
                 {(status === "terisi" || (status === "rusak" && penyewa)) && (
                     <button
                         className="bg-red-600 py-1 px-3 rounded-lg hover:bg-red-700"
-                        onClick={handleHapusPenyewa}>
+                        onClick={openModalHapusPenyewa}>
                         Hapus Penyewa
                     </button>
+                )}
+                {isModalHapusPenyewa && (
+                    <div className="fixed flex inset-0 items-center justify-center z-50 bg-black bg-opacity-50">
+                        <div className="relative flex flex-col w-full max-w-md p-6 bg-white animate-popup rounded-lg shadow-lg">
+                            <button className="absolute right-3 top-3 text-black"
+                                onClick={closeModalHapusPenyewa}>X</button>
+                            <h2 className="text-xl font-semibold text-center text-black">
+                                Hapus Penyewa
+                            </h2>
+                            <p className="text-abu text-center">Anda Yakin Ingin Menghapus Penyewa?</p>
+                            <div className="flex justify-between mt-6">
+                                <button className="bg-abu2 text-black px-4 py-2 rounded-lg"
+                                    onClick={closeModalHapusPenyewa}>
+                                    Batal
+                                </button>
+                                <button className="bg-merah text-white px-4 py-2 rounded-lg"
+                                    onClick={() => {
+                                        handleHapusPenyewa();
+                                        closeModalHapusPenyewa();
+                                    }}>
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 )}
             </div>
         </div>
