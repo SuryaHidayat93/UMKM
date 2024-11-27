@@ -1,14 +1,19 @@
 import Navbar from "@/components/navbar/navbarKD";
 import CardPermintaanSewa from "@/components/Card/Kadiv/PermintaanSewa";
+import ModalPenolakanPenyewaan from "@/components/Modal/PenolakanPenyewa";
 import { useState } from "react";
 
 export default function Permintaanpenyewaan() {
     const [isModalPermintaanPenyewaanOpen, setIsModalPermintaanPenyewaanOpen] = useState(false);
     const [isModalBoothOpen, setIsModalBoothOpen] = useState(false);
     const [isModalBerhasilDipilihOpen, setIsModalBerhasilDipilihOpen] = useState(false);
+    const [isModalPenolakanPenyewaanOpen, setIsModalPenolakanPenyewaanOpen] = useState(false)
 
     const openModalPermintaanPenyewaan = () => setIsModalPermintaanPenyewaanOpen(true);
     const closeModalPermintaanPenyewaan = () => setIsModalPermintaanPenyewaanOpen(false);
+
+    const openModalPenolakanPenyewaan = () => setIsModalPenolakanPenyewaanOpen(true)
+    const closeModalPenolakanPenyewaan = () => setIsModalPenolakanPenyewaanOpen(false)
 
     const openModalBooth = () => setIsModalBoothOpen(true);
     const closeModalBooth = () => setIsModalBoothOpen(false);
@@ -20,6 +25,12 @@ export default function Permintaanpenyewaan() {
         closeModalBooth();
         openModalBerhasilDipilih();
         closeModalPermintaanPenyewaan();
+    }
+
+    const handletolak = () => {
+        openModalPenolakanPenyewaan();
+        closeModalPermintaanPenyewaan();
+
     }
 
 
@@ -38,7 +49,7 @@ export default function Permintaanpenyewaan() {
     return (
         <div className="h-screen w-full overflow-y-auto bg-primary">
             <Navbar isHamburger title="Permintaan Penyewaan" />
-
+            <ModalPenolakanPenyewaan isOpen={isModalPenolakanPenyewaanOpen} onClose={closeModalPenolakanPenyewaan} />
             {isModalPermintaanPenyewaanOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white w-full max-w-4xl px-8 pb-32 animate-slideIn rounded-md overflow-y-auto max-h-screen relative">
@@ -101,7 +112,7 @@ export default function Permintaanpenyewaan() {
                         <div className="mt-6 flex justify-between gap-4">
                             <button
                                 className="px-6 py-2 bg-merah text-white rounded-md hover:bg-red-700 transition"
-                                onClick={closeModalPermintaanPenyewaan}
+                                onClick={handletolak}
                             >
                                 Tolak
                             </button>
@@ -137,6 +148,13 @@ export default function Permintaanpenyewaan() {
                         >
                             Konfirmasi
                         </button>
+                        <button
+                            className="bg-white text-black w-5/6 px-4 py-2 rounded-lg border border-abu2"
+                            onClick={closeModalBooth}
+                        >
+                            Batal
+                        </button>
+
                     </div>
                 </div>
             )}

@@ -1,4 +1,5 @@
-import ModalHapuspenyewa from "@/components/Modal/DelatePenyewa";
+import ModalRiwayatKerusakanBooth from "@/components/Modal/RiwayatKerusakanBooth";
+import ModalTambahRiwayatKerusakanBooth from "@/components/Modal/TambahRIwayatKerusakan";
 import { useState, useEffect } from "react";
 interface BoothCardProps {
     boothName: string;
@@ -10,10 +11,21 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
     const [penyewa, setPenyewa] = useState<string | null>(initialPenyewa);
     const [status, setStatus] = useState(initialStatus);
 
+    // Modal Hapus Penyewa
     const [isModalHapusPenyewa, setIsModalHapusPenyewa] = useState(false);
-
     const openModalHapusPenyewa = () => setIsModalHapusPenyewa(true);
     const closeModalHapusPenyewa = () => setIsModalHapusPenyewa(false);
+
+    // Modal Riwayat Kerusakan
+    const [isModalRiwayatKerusakanOpen, setisModalRiwayatKerusakanOpen] = useState(false);
+    const openModalRiwayatKerusakan = () => setisModalRiwayatKerusakanOpen(true);
+    const closeModalRiwayatKerusakan = () => setisModalRiwayatKerusakanOpen(false);
+
+    //ModalTambah Riwayat Kerusakan
+    const [isModalTambahRiwayatKerusakanOpen, setIsModalTambahRiwayatKerusakanOpen] = useState(false);
+    const openModalTambahRiwayatKerusakan = () => setIsModalTambahRiwayatKerusakanOpen(true);
+    const closeModalTambahRiwayatKerusakan = () => setIsModalTambahRiwayatKerusakanOpen(false);
+
     useEffect(() => {
         setStatus(initialStatus);
     }, [initialStatus]);
@@ -61,7 +73,8 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
 
     return (
         <div className={`rounded-lg shadow-md w-full border pb-3 bg-white text-white ${cardColor}`} >
-            <ModalHapuspenyewa isOpen={isModalHapusPenyewa} onClose={closeModalHapusPenyewa} />
+            <ModalRiwayatKerusakanBooth isOpen={isModalRiwayatKerusakanOpen} onClose={closeModalRiwayatKerusakan} />
+            <ModalTambahRiwayatKerusakanBooth isOpen={isModalTambahRiwayatKerusakanOpen} onClose={closeModalTambahRiwayatKerusakan} />
             <div className={`${divColor} rounded-t-lg w-full justify-between flex px-4 py-2`}>
                 <h3 className="text-lg font-bold">{boothName}</h3>
                 <div className="rounded-lg px-2 items-center flex justify-center border border-white">
@@ -76,7 +89,9 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
             </div>
             <div className="mt-4 ml-3 gap-3 w-full flex flex-col items-start">
 
-                <button className="bg-white border flex flex-row items-center justify-center border-unik text-black py-1 px-3 rounded-lg group hover:bg-unik hover:text-white">
+                <button
+                    className="bg-white border flex flex-row items-center justify-center border-unik text-black py-1 px-3 rounded-lg group hover:bg-unik hover:text-white"
+                    onClick={openModalRiwayatKerusakan}>
                     <img
                         src="/images/kalender.png"
                         alt="Kalender"
@@ -91,7 +106,9 @@ export default function BoothCard({ boothName, initialPenyewa, initialKerusakan,
                 </button>
 
                 <div className="flex flex-row gap-3">
-                    <button className="bg-white border flex flex-row items-center justify-center border-unik text-black py-1 px-3 rounded-lg group hover:bg-unik hover:text-white">
+                    <button
+                        className="bg-white border flex flex-row items-center justify-center border-unik text-black py-1 px-3 rounded-lg group hover:bg-unik hover:text-white"
+                        onClick={openModalTambahRiwayatKerusakan}>
                         <img
                             src="/images/plus(hijau).png"
                             alt="Kalender"
