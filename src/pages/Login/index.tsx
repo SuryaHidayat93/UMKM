@@ -41,8 +41,8 @@ export default function Login() {
     };
 
     return (
-        <div className="h-screen bg-unik2 items-center justify-center flex">
-            <div className="flex flex-col bg-white items-center rounded-2xl w-2/6 border gap-4 border-abu2 p-6">
+        <div className="h-screen bg-unik2 items-center p-6 justify-center flex">
+            <div className="flex flex-col bg-white items-center rounded-2xl w-full md:w-2/6 border gap-4 border-abu2 p-6">
                 <div className="flex flex-col items-center">
                     <h1 className="text-2xl font-bold text-black">Login</h1>
                     <p className="text-abu text-sm">Masuk ke akun anda</p>
