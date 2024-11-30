@@ -1,84 +1,104 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import Link from 'next/link'
 
 export default function Login() {
-    // State untuk nomor HP, password, dan error messages
     const [phoneNumber, setPhoneNumber] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [error, setError] = useState('');
 
-    // Dummy data untuk validasi
+    // Dummy data for validation
     const dummyPhoneNumber = '081234567890';
     const dummyPassword = 'password123';
 
-    // Fungsi untuk menangani perubahan input NO HP
-    const handlePhoneNumberChange = (e) => {
-        // Menghapus karakter selain angka
+    const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/\D/g, '');
         setPhoneNumber(value);
     };
 
-    // Fungsi untuk menangani login
-    const handleLogin = () => {
-        // Validasi nomor HP (minimal 11 angka dan maksimal 13 angka)
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        setError('');
+
         if (phoneNumber.length < 11 || phoneNumber.length > 13) {
-            setErrorMessage('Nomor HP Tidak Valid.');
+            setError('Nomor HP Tidak Valid.');
             return;
         }
 
-        // Validasi password
-        if (password !== dummyPassword) {
-            setErrorMessage('Password yang Anda masukkan salah.');
-            return;
-        }
-
-        // Jika nomor HP dan password benar
         if (phoneNumber === dummyPhoneNumber && password === dummyPassword) {
             alert('Login berhasil!');
-            setErrorMessage(''); // Reset pesan error jika berhasil
         } else {
-            setErrorMessage('Nomor HP atau sandi salah.');
+            setError('Nomor HP atau sandi salah.');
         }
     };
 
     return (
-        <div className="h-screen bg-unik2 items-center p-6 justify-center flex">
-            <div className="flex flex-col bg-white items-center rounded-2xl w-full md:w-2/6 border gap-4 border-abu2 p-6">
-                <div className="flex flex-col items-center">
-                    <h1 className="text-2xl font-bold text-black">Login</h1>
-                    <p className="text-abu text-sm">Masuk ke akun anda</p>
-                </div>
-                <div className="w-full flex items-center flex-col">
-                    <input
-                        type="text"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        placeholder="NO HP"
-                        className="border text-black border-gray-300 w-full rounded-lg p-2 mb-4"
-                        value={phoneNumber}
-                        onChange={handlePhoneNumberChange}
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="border text-black w-full border-gray-300 rounded-lg p-2 mb-4"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-                <button
-                    className="bg-unik text-white py-2 px-4 w-full rounded-md"
-                    onClick={handleLogin}
-                >
-                    Login
-                </button>
-                {errorMessage && (
-                    <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
-                )}
-                <div className="w-full flex flex-col items-center">
-                    <button className="text-unik font-medium text-sm">Lupa Password?</button>
-                    <div className="text-black text-sm">Belum Punya Akun? <button className="text-unik">Daftar di sini</button></div>
-                </div>
+        <div className="min-h-screen bg-unik2 flex items-center justify-center p-6">
+            <div className="w-full max-w-md">
+                <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
+                    <div className="text-center mb-6">
+                        <h1 className="text-2xl font-bold text-black">Login</h1>
+                        <p className="text-sm text-gray-600">Masuk ke akun anda</p>
+                    </div>
+                    <div className="mb-4">
+                        <Label htmlFor="phoneNumber" className="block text-gray-700 text-sm font-bold mb-2">
+                            NO HP
+                        </Label>
+                        <Input
+                            id="phoneNumber"
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            placeholder="Contoh: 081234567890"
+                            value={phoneNumber}
+                            onChange={handlePhoneNumberChange}
+                            className="w-full"
+                            required
+                        />
+                    </div>
+                    <div className="mb-6">
+                        <Label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                            Password
+                        </Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            placeholder="Masukkan password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full"
+                            required
+                        />
+                    </div>
+                    {error && (
+                        <Alert variant="destructive" className="mb-4">
+                            <AlertDescription>{error}</AlertDescription>
+                        </Alert>
+                    )}
+                    <div className="flex items-center justify-between mb-6">
+                        <Button type="submit" className="w-full bg-unik hover:bg-unik/90">
+                            Login
+                        </Button>
+                    </div>
+                    <div className="text-center">
+                        <Link href="/forgot-password" className="text-unik text-sm font-medium hover:underline">
+                            Lupa Password?
+                        </Link>
+                    </div>
+                    <div className="text-center mt-4">
+                        <p className="text-sm text-gray-600">
+                            Belum Punya Akun?{' '}
+                            <Link href="/register" className="text-unik font-medium hover:underline">
+                                Daftar di sini
+                            </Link>
+                        </p>
+                    </div>
+                </form>
             </div>
         </div>
     );
 }
+

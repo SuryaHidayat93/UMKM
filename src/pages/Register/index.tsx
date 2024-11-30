@@ -1,101 +1,142 @@
-import { useState } from "react";
+import React, { useState, FormEvent } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from "@/components/ui/dialog";
+import Link from 'next/link';
 
-export default function Register() {
-    // State untuk menyimpan input dari pengguna
+interface FormErrors {
+    nama?: string;
+    noHp?: string;
+    password?: string;
+}
+
+export default function RegisterForm() {
     const [nama, setNama] = useState("");
     const [noHp, setNoHp] = useState("");
     const [password, setPassword] = useState("");
-
-    // State untuk menampilkan modal dan pesan error
+    const [errors, setErrors] = useState<FormErrors>({});
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
 
-    // Fungsi validasi ketika tombol Register ditekan
-    const handleRegister = () => {
-        // Validasi apakah semua field sudah diisi
-        if (!nama || !noHp || !password) {
-            setModalMessage("Semua field harus diisi");
-            setIsModalOpen(true); // Buka modal dengan pesan kesalahan
-            return;
+    const validateForm = (): boolean => {
+        const newErrors: FormErrors = {};
+
+        if (!nama.trim()) {
+            newErrors.nama = "Nama harus diisi";
         }
 
-        // Validasi nomor HP (minimal 10 angka)
-        if (noHp.length < 11) {
-            setModalMessage("Nomor HP tidak valid");
-            setIsModalOpen(true); // Buka modal dengan pesan kesalahan
-            return;
+        if (noHp.length < 11 || noHp.length > 13) {
+            newErrors.noHp = "Nomor HP harus antara 11 dan 13 digit";
         }
 
-        // Jika validasi lolos
-        setModalMessage("Registrasi berhasil!");
-        setIsModalOpen(true); // Buka modal dengan pesan sukses
+        if (password.length < 8) {
+            newErrors.password = "Password minimal 8 karakter";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
-    // Fungsi untuk menutup modal
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        if (validateForm()) {
+            console.log({ nama, noHp, password });
+            setModalMessage("Registrasi berhasil!");
+            setIsModalOpen(true);
+        }
     };
 
     return (
-        <div className="h-screen bg-primary p-6 items-center justify-center flex">
-            <div className="flex flex-col w-full bg-white items-center rounded-2xl md:w-2/6 border gap-4 border-abu2 p-6">
-                <div className="flex flex-col items-center">
-                    <h1 className="text-2xl font-bold text-black">Register</h1>
-                    <p className="text-abu text-sm">Silahkan isi form dibawah</p>
-                </div>
-                <div className="w-full flex items-center flex-col">
-                    <input
-                        type="text"
-                        placeholder="Nama"
-                        className="border text-black border-abu2 w-full rounded-lg p-2 mb-4"
-                        value={nama}
-                        required
-                        onChange={(e) => setNama(e.target.value)} // Update state nama
-                    />
-                    <input
-                        type="tel"
-                        placeholder="NO HP"
-                        className="border text-black border-abu2 w-full rounded-lg p-2 mb-4"
-                        maxLength={13}
-                        minLength={11}
-                        value={noHp}
-                        required
-                        autoComplete="tel"
-                        onChange={(e) => setNoHp(e.target.value.replace(/[^0-9]/g, ''))} // Hanya angka yang bisa diinput
-                    />
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        className="border text-black w-full border-gray-300 rounded-lg p-2 mb-4"
-                        value={password}
-                        required
-                        onChange={(e) => setPassword(e.target.value)} // Update state password
-                    />
-                </div>
-                <button
-                    className="bg-unik text-white py-2 px-4 w-full rounded-md"
-                    onClick={handleRegister}
-                >
-                    Register
-                </button>
-                <div className="text-black text-sm">Sudah punya akun? <button className="text-unik">Login di sini</button></div>
+        <div className="min-h-screen bg-unik2 flex items-center justify-center p-6">
+            <div className="w-full max-w-md">
+                <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4">
+                    <div className="text-center mb-6">
+                        <h1 className="text-2xl font-bold text-black">Register</h1>
+                        <p className="text-sm text-gray-600">Silahkan isi form dibawah</p>
+                    </div>
+
+                    <div className="mb-4">
+                        <Label htmlFor="nama" className="block text-gray-700 text-sm font-bold mb-2">
+                            Nama
+                        </Label>
+                        <Input
+                            id="nama"
+                            type="text"
+                            placeholder="Masukkan nama lengkap"
+                            value={nama}
+                            onChange={(e) => setNama(e.target.value)}
+                            className="w-full"
+                        />
+                        {errors.nama && <p className="text-red-500 text-xs italic">{errors.nama}</p>}
+                    </div>
+
+                    <div className="mb-4">
+                        <Label htmlFor="noHp" className="block text-gray-700 text-sm font-bold mb-2">
+                            NO HP
+                        </Label>
+                        <Input
+                            id="noHp"
+                            type="tel"
+                            placeholder="Contoh: 081234567890"
+                            value={noHp}
+                            onChange={(e) => setNoHp(e.target.value.replace(/\D/g, ''))}
+                            className="w-full"
+                        />
+                        {errors.noHp && <p className="text-red-500 text-xs italic">{errors.noHp}</p>}
+                    </div>
+
+                    <div className="mb-6">
+                        <Label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
+                            Password
+                        </Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            placeholder="Masukkan password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full"
+                        />
+                        {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+                    </div>
+
+                    <div className="flex items-center justify-between mb-6">
+                        <Button type="submit" className="w-full bg-unik hover:bg-unik/90">
+                            Register
+                        </Button>
+                    </div>
+
+                    <div className="text-center">
+                        <p className="text-sm text-gray-600">
+                            Sudah punya akun?{' '}
+                            <Link href="/login" className="text-unik font-medium hover:underline">
+                                Login di sini
+                            </Link>
+                        </p>
+                    </div>
+                </form>
             </div>
 
-            {/* Modal */}
-            {isModalOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white rounded-lg p-6 animate-popup max-w-sm w-full">
-                        <h2 className="text-lg font-semibold mb-4 text-black">Informasi</h2>
-                        <p className="text-black">{modalMessage}</p>
-                        <button
-                            className="mt-4 bg-unik text-white py-2 px-4 rounded-md"
-                            onClick={closeModal}
-                        >
-                            Tutup
-                        </button>
-                    </div>
-                </div>
-            )}
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Informasi</DialogTitle>
+                        <DialogDescription>{modalMessage}</DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button onClick={() => setIsModalOpen(false)}>Tutup</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 }
+

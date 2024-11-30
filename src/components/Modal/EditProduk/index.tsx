@@ -3,7 +3,7 @@ import React from "react";
 interface ModaleditprodukProps {
     isOpen: boolean;
     onClose: () => void;
-    onSubmit?: () => void; // opsional
+    onSubmit?: () => void;
 }
 
 const Modaleditproduk: React.FC<ModaleditprodukProps> = ({
