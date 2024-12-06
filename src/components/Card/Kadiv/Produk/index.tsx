@@ -20,6 +20,8 @@ const CardProduk: React.FC<CardProdukProps> = ({
     gambar,
     onEdit,
     onDelete,
+
+    
 }) => {
     return (
         <div className="bg-white rounded-xl p-4 shadow-md gap-3 flex flex-col">

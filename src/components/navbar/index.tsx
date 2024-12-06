@@ -5,7 +5,7 @@ export default function Navbar() {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     return (
-        <div className="w-full flex justify-center  top-0 left-0 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="w-full flex justify-center bg-unik2 top-0 left-0 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <header className="flex items-center justify-between h-12 w-full mt-6 md:mt-10">
 
                 {/* Logo */}

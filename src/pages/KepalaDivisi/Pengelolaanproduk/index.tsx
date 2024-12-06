@@ -8,7 +8,7 @@ import ModalHapusproduk from "@/components/Modal/DelateProduk";
 export default function Pengelolaanproduk() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModalTambahProdukOpen, setIsModalTambahProdukOpen] = useState(false);
-    const [isModalHapusProdukOpen, setIsModalHapusProdukOpen] = useState(false)
+    const [isModalHapusProdukOpen, setIsModalHapusProdukOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -18,21 +18,46 @@ export default function Pengelolaanproduk() {
 
     const openDelateProduk = () => setIsModalHapusProdukOpen(true);
     const closeDelateProduk = () => setIsModalHapusProdukOpen(false);
+
     const handleSubmit = () => {
         console.log("Produk berhasil disimpan!");
         closeModal();
     };
 
-    const handleEdit = () => {
-        alert("Edit produk!");
-    };
-
-    const handleDelete = () => {
-        alert("Hapus produk!");
-    };
+    // Dummy data produk
+    const dummyDataProduk = [
+        {
+            namaProduk: "Booth Kayu Premium",
+            ukuran: "12X12X12",
+            deskripsi: "Booth dengan bahan kayu premium dan kualitas tinggi",
+            harga: "Rp. 100.000",
+            gambar: "/images/booth2.png",
+        },
+        {
+            namaProduk: "Meja Lipat",
+            ukuran: "15X10X10",
+            deskripsi: "Meja lipat praktis dan kuat dengan desain minimalis",
+            harga: "Rp. 150.000",
+            gambar: "/images/booth2.png",
+        },
+        {
+            namaProduk: "Rak Buku Kayu",
+            ukuran: "10X10X20",
+            deskripsi: "Rak buku berbahan kayu berkualitas untuk ruang tamu",
+            harga: "Rp. 120.000",
+            gambar: "/images/booth2.png",
+        },
+        {
+            namaProduk: "Kursi Taman",
+            ukuran: "18X12X15",
+            deskripsi: "Kursi kayu taman yang nyaman dan tahan cuaca",
+            harga: "Rp. 200.000",
+            gambar: "/images/booth2.png",
+        },
+    ];
 
     return (
-        <div className="h-screen w-full overflow-y-auto bg-primary">
+        <div className="h-screen w-full overflow-y-auto bg-unik2">
             <Navbar isHamburger title="Pengelolaan Produk" />
 
             {/* Container Utama */}
@@ -64,48 +89,22 @@ export default function Pengelolaanproduk() {
                 <ModalHapusproduk
                     isOpen={isModalHapusProdukOpen}
                     onClose={closeDelateProduk}
-
                 />
 
                 {/* Produk List */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10 h-full w-full place-items-center py-5 md:px-11">
-                    <CardProduk
-                        namaProduk="Nama Produk"
-                        ukuran="12X12X12"
-                        deskripsi="Booth dengan bahan kayu premium dan kualitas tinggi"
-                        harga="Rp. 100.000"
-                        gambar="/images/booth2.png"
-                        onEdit={openModal}
-                        onDelete={openDelateProduk}
-                    />
-                    <CardProduk
-                        namaProduk="Nama Produk"
-                        ukuran="12X12X12"
-                        deskripsi="Booth dengan bahan kayu premium dan kualitas tinggi"
-                        harga="Rp. 100.000"
-                        gambar="/images/booth2.png"
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                    />
-                    <CardProduk
-                        namaProduk="Nama Produk"
-                        ukuran="12X12X12"
-                        deskripsi="Booth dengan bahan kayu premium dan kualitas tinggi"
-                        harga="Rp. 100.000"
-                        gambar="/images/booth2.png"
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                    />
-                    <CardProduk
-                        namaProduk="Nama Produk"
-                        ukuran="12X12X12"
-                        deskripsi="Booth dengan bahan kayu premium dan kualitas tinggi"
-                        harga="Rp. 100.000"
-                        gambar="/images/booth2.png"
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                    />
-                    {/* Tambahkan CardProduk lainnya */}
+                    {dummyDataProduk.map((produk, index) => (
+                        <CardProduk
+                            key={index}
+                            namaProduk={produk.namaProduk}
+                            ukuran={produk.ukuran}
+                            deskripsi={produk.deskripsi}
+                            harga={produk.harga}
+                            gambar={produk.gambar}
+                            onEdit={openModal}
+                            onDelete={openDelateProduk}
+                        />
+                    ))}
                 </div>
             </div>
         </div>

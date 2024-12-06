@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ isHamburger = false, title }) => {
     const toggleHamburger = () => setHamburgerOpen(!hamburgerOpen);
 
     return (
-        <nav className="bg-primary text-green px-6 py-8">
+        <nav className="bg-primary text-green bg-unik2 px-6 py-8">
             <div className=" mx-auto md:mr-1 md:ml-1 flex items-center justify-between gap-4">
                 {/* Hamburger Menu dan Title */}
                 {isHamburger ? (
