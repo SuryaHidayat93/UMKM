@@ -1,13 +1,16 @@
-'use client'
+'use client';
+import dynamic from 'next/dynamic';
+import 'leaflet/dist/leaflet.css';
+import { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import Navbar from '@/components/navbar/navbarKD';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { BoothItem } from '@/components/Card/BoothPemantauanBisnis';
+import { BoothDetailModal } from '@/components/Modal/Boothdetail';
 
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { LocationMap } from '@/components/Location'
-import Navbar from '@/components/navbar/navbarKD'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { BoothItem } from '@/components/Card/BoothPemantauanBisnis'
-import { BoothDetailModal } from '@/components/Modal/Boothdetail'
+// Dynamically import LocationMap with SSR disabled
+const LocationMap = dynamic(() => import('@/components/Location'), { ssr: false });
 
 const boothData = [
     { id: "1", penyewa: "Bu Warni", lokasi: "Panam", status: "Aktif", ktpImage: "/placeholder.svg?height=200&width=320" },
@@ -15,24 +18,24 @@ const boothData = [
     { id: "3", penyewa: "Ibu Siti", lokasi: "Marpoyan", status: "Aktif", ktpImage: "/placeholder.svg?height=200&width=320" },
     { id: "4", penyewa: "Pak Ahmad", lokasi: "Rumbai", status: "Aktif", ktpImage: "/placeholder.svg?height=200&width=320" },
     { id: "5", penyewa: "Bu Rina", lokasi: "Tampan", status: "Aktif", ktpImage: "/placeholder.svg?height=200&width=320" },
-]
+];
 
 export default function PemantauanBisnis() {
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [selectedBooth, setSelectedBooth] = useState(boothData[0])
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedBooth, setSelectedBooth] = useState(boothData[0]);
 
     const handleDetailClick = (booth) => {
-        setSelectedBooth(booth)
-        setIsModalOpen(true)
-    }
+        setSelectedBooth(booth);
+        setIsModalOpen(true);
+    };
 
     const handleCloseModal = () => {
-        setIsModalOpen(false)
-    }
+        setIsModalOpen(false);
+    };
 
     return (
         <div className="mx-auto p-4 space-y-4 bg-unik2 h-screen overflow-y-auto pb-32">
-            <Navbar isHamburger title='Pemantauan Bisnis' />
+            <Navbar isHamburger title="Pemantauan Bisnis" />
             <div className="grid gap-4 md:grid-cols-3">
                 <Card>
                     <CardHeader>
@@ -66,7 +69,7 @@ export default function PemantauanBisnis() {
 
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle className='font-bold text-unik'>Data Penyewa Booth</CardTitle>
+                    <CardTitle className="font-bold text-unik">Data Penyewa Booth</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="hidden md:block">
@@ -87,8 +90,12 @@ export default function PemantauanBisnis() {
                                         <TableCell>{booth.penyewa}</TableCell>
                                         <TableCell>{booth.lokasi}</TableCell>
                                         <TableCell>
-                                            <span className={`px-2 py-1 rounded text-xs font-medium ${booth.status === "Aktif" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
-                                                }`}>
+                                            <span
+                                                className={`px-2 py-1 rounded text-xs font-medium ${booth.status === 'Aktif'
+                                                    ? 'bg-green-100 text-green-800'
+                                                    : 'bg-red-100 text-red-800'
+                                                    }`}
+                                            >
                                                 {booth.status}
                                             </span>
                                         </TableCell>
@@ -125,5 +132,5 @@ export default function PemantauanBisnis() {
                 boothData={{ ...selectedBooth, ktpImage: selectedBooth.ktpImage }}
             />
         </div>
-    )
+    );
 }
